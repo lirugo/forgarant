@@ -14,4 +14,11 @@ class ProductController extends Controller
         //Set product to view
         return view('product.index')->with('products', $products);
     }
+
+    public function show($id){
+        //Get current product
+        $product = Product::find($id);
+        //Set product to view
+        return view('product.show')->with('product',$product);
+    }
 }
