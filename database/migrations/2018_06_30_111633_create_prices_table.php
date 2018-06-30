@@ -16,7 +16,10 @@ class CreatePricesTable extends Migration
         Schema::create('product_prices', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('product_id')->unsigned();
-            $table->foreign('product_id')->references('id')->on('products');
+            $table->foreign('product_id')
+                ->references('id')
+                ->on('products')
+                ->onDelete('cascade');
             $table->decimal('price',10,2);
             $table->date('date_start');
             $table->date('date_end');
@@ -32,6 +35,9 @@ class CreatePricesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('prices');
+        Schema::table('product_prices', function ($table) {
+            $table->dropForeign('product_prices_product_id_foreign');
+            $table->dropIfExists('product_prices');
+        });
     }
 }
