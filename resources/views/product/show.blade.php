@@ -15,7 +15,7 @@
             </div>
             <div class="col-md-9">
                 <div class="card">
-                    <div class="card-header text-center">Graph price</div>
+                    <div class="card-header text-center">Graph - Priority is the price set later</div>
                     <div class="card-body">
                         {{--Graphs--}}
                         <div id="pop_div"></div>
