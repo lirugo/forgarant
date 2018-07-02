@@ -23,12 +23,47 @@ class ProductSeeder extends Seeder
 
         DB::table('product_prices')->insert([
             'product_id' => '1',
-            'price' => '999.00',
-            'date_start' => '2018-01-01',
-            'date_end' => '2018-02-01',
+            'price' => '8000.00',
+            'date_start' => '2016-01-01',
+            'date_end' => NULL,
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
         ] );
 
+        DB::table('product_prices')->insert([
+            'product_id' => '1',
+            'price' => '12000.00',
+            'date_start' => '2016-05-01',
+            'date_end' => '2017-01-01',
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+        ] );
+
+        DB::table('product_prices')->insert([
+            'product_id' => '1',
+            'price' => '15000.00',
+            'date_start' => '2016-07-01',
+            'date_end' => '2016-09-10',
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+        ] );
+
+        DB::table('product_prices')->insert([
+            'product_id' => '1',
+            'price' => '20000.00',
+            'date_start' => '2017-06-01',
+            'date_end' => '2017-10-20',
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+        ] );
+
+        DB::table('product_prices')->insert([
+            'product_id' => '1',
+            'price' => '5000.00',
+            'date_start' => '2017-12-15',
+            'date_end' => '2017-12-31',
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+        ] );
     }
 }

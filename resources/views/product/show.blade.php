@@ -17,7 +17,9 @@
                 <div class="card">
                     <div class="card-header text-center">Graph price</div>
                     <div class="card-body">
-                        // Graph
+                        {{--Graphs--}}
+                        <div id="pop_div"></div>
+                        @areachart('Price', 'pop_div')
                     </div>
                 </div>
             </div>

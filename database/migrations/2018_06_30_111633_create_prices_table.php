@@ -22,7 +22,7 @@ class CreatePricesTable extends Migration
                 ->onDelete('cascade');
             $table->decimal('price',10,2);
             $table->date('date_start');
-            $table->date('date_end');
+            $table->date('date_end')->nullable();
             $table->enum('currency',['UAH','USD','RUB']);
             $table->timestamps();
         });
