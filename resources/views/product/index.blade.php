@@ -19,7 +19,7 @@
                         <div class="card-header text-center border-success">{{$product->name}}</div>
                         <div class="card-body">
                             <p class="card-text">{{ strlen($product->description) > 60 ? substr($product->description,0,57).'...' : $product->description }}</p>
-                            <a href="{{url('products/'.$product->id)}}" class="btn btn-primary">Details</a>
+                            <a href="{{url('products/'.$product->id)}}" class="btn btn-outline-primary">Details</a>
                         </div>
                         <div class="card-footer bg-transparent border-success">Price - {{number_format($product->price,2)}} | {{$product->currency}}</div>
                     </div>

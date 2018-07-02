@@ -22,4 +22,5 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::group(['prefix' => 'products', 'namespace' => 'Product'], function() {
     Route::get('/', 'ProductController@index');
     Route::get('/{id}/', 'ProductController@show');
+    Route::get('/{id}/create', 'PriceController@create')->name('products.create');
 });
