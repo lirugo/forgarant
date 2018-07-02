@@ -18,8 +18,8 @@
                     <div class="card-header text-center">Graph - Priority is the price set later</div>
                     <div class="card-body">
                         {{--Graphs--}}
-                        <div id="pop_div"></div>
-                        @areachart('Price', 'pop_div')
+                        <div id="priority_price_set_later"></div>
+                        @areachart('PriorityPriceSetLater', 'priority_price_set_later')
                     </div>
                 </div>
             </div>
@@ -33,6 +33,17 @@
                     </div>
                     <div class="card-footer bg-transparent border-success">
                         <a class="btn btn-outline-success">Update</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-9">
+                <div class="card">
+                    <div class="card-header text-center">Graph - Priority is the price set on smaller time</div>
+                    <div class="card-body">
+                        {{--Graphs--}}
+                        <div id="priority_price_set_smaller_time"></div>
+                        @areachart('PriorityPriceSetSmallerTime', 'priority_price_set_smaller_time')
                     </div>
                 </div>
             </div>

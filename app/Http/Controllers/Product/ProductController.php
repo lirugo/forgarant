@@ -20,16 +20,58 @@ class ProductController extends Controller
 
         foreach($product->prices as $price){
             // Start date
-            $date = $price->date_start;
+            $dateStart = $price->date_start;
             // End date
-            $end_date = $price->date_end ? $price->date_end : date('Y-m-d');
+            $dateEnd = $price->date_end ? $price->date_end : date('Y-m-d');
+            while (strtotime($dateStart) <= strtotime($dateEnd)) {
+                $chart->put($dateStart, $price->price);
+                $dateStart = date ("Y-m-d", strtotime("+1 day", strtotime($dateStart)));
+            }
+        }
+        return $chart;
+    }
 
-            while (strtotime($date) <= strtotime($end_date)) {
-                $chart->put($date, $price->price);
-                $date = date ("Y-m-d", strtotime("+1 day", strtotime($date)));
+    /**
+     * @param $product
+     * @return Collection
+     */
+    private function priorityPriceSetSmallerTime($product){
+        //Create collection
+        $chart = new Collection();
+
+        //Get all prices from product
+        $prices = $product->prices;
+
+        //Set different between date start and date and
+        foreach($prices as $price){
+            //Start date
+            $dateStart = strtotime($price->date_start);
+
+            //End date
+            $dateEnd = strtotime($price->date_end ? $price->date_end : date('Y-m-d'));
+
+            //Set different
+            $dateDiff = $dateEnd - $dateStart;
+            $price->different = round($dateDiff / (60 * 60 * 24));
+        }
+
+        //Sorting by different
+        $prices = $prices->sortByDesc('different');
+
+        //Set collection
+        foreach($prices as $price){
+            // Start date
+            $dateStart = $price->date_start;
+            // End date
+            $dateEnd = $price->date_end ? $price->date_end : date('Y-m-d');
+
+            while (strtotime($dateStart) <= strtotime($dateEnd)) {
+                $chart->put($dateStart, $price->price);
+                $dateStart = date ("Y-m-d", strtotime("+1 day", strtotime($dateStart)));
             }
         }
 
+        //Return collection
         return $chart;
     }
 
@@ -39,7 +81,6 @@ class ProductController extends Controller
     public function __construct(){
         //
     }
-
 
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
@@ -61,22 +102,35 @@ class ProductController extends Controller
         $product = Product::find($id);
 
         //Create chart
-        $population = Lava::DataTable();
+        $priorityPriceSetLater = Lava::DataTable();
+        $priorityPriceSetSmallerTime = Lava::DataTable();
 
         //Set chart
-        $population->addDateColumn('Date')
+        $priorityPriceSetLater->addDateColumn('Date')
+            ->addNumberColumn('Price on '.$product->name);
+        $priorityPriceSetSmallerTime->addDateColumn('Date')
             ->addNumberColumn('Price on '.$product->name);
 
         //Get collection with date for chart
-        $chart = $this->priorityPriceSetLater($product);
+        $chartPriceSetLater = $this->priorityPriceSetLater($product);
+        $chartPriceSetSmallerTime = $this->priorityPriceSetSmallerTime($product);
 
         //Set data to chart
-        foreach ($chart as $ch => $key){
-            $population->addRow([$ch, $key]);
+        foreach ($chartPriceSetLater as $ch => $key){
+            $priorityPriceSetLater->addRow([$ch, $key]);
+        }
+        foreach ($chartPriceSetSmallerTime as $ch => $key){
+            $priorityPriceSetSmallerTime->addRow([$ch, $key]);
         }
 
         //Set chart to view
-        Lava::AreaChart('Price', $population, [
+        Lava::AreaChart('PriorityPriceSetLater', $priorityPriceSetLater, [
+            'title' => 'Price on '.$product->name,
+            'legend' => [
+                'position' => 'none'
+            ]
+        ]);
+        Lava::AreaChart('PriorityPriceSetSmallerTime', $priorityPriceSetSmallerTime, [
             'title' => 'Price on '.$product->name,
             'legend' => [
                 'position' => 'none'
