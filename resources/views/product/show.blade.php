@@ -10,7 +10,7 @@
                     <div class="card-body">
                         <p class="card-text">{{$product->description}}</p>
                     </div>
-                    <div class="card-footer bg-transparent border-success">Price - {{$product->prices->last()->price}} | {{$product->prices->last()->currency}}</div>
+                    <div class="card-footer bg-transparent border-success">Price - {{number_format($product->price,2)}} | {{$product->currency}}</div>
                 </div>
             </div>
             <div class="col-md-9">

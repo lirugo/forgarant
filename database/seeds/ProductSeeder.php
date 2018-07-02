@@ -17,6 +17,7 @@ class ProductSeeder extends Seeder
             'id' => '1',
             'name' => 'School uniform',
             'description' => 'The most convenient and high quality school uniform',
+            'currency' => 'RUB',
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
         ] );

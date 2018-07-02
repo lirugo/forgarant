@@ -17,6 +17,8 @@ class CreateProductsTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->text('description');
+            $table->decimal('price',10,2)->default('10000');
+            $table->enum('currency',['UAH','USD','RUB']);
             $table->string('img')->default('default.jpg');
             $table->timestamps();
         });
