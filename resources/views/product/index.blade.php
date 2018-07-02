@@ -18,7 +18,7 @@
                         <img class="card-img-top" src="{{ url('storage/products/img/'.$product->img) }}" alt="{{$product->name}}">
                         <div class="card-header text-center border-success">{{$product->name}}</div>
                         <div class="card-body">
-                            <p class="card-text">{{$product->description}}</p>
+                            <p class="card-text">{{ strlen($product->description) > 60 ? substr($product->description,0,57).'...' : $product->description }}</p>
                             <a href="{{url('products/'.$product->id)}}" class="btn btn-primary">Details</a>
                         </div>
                         <div class="card-footer bg-transparent border-success">Price - {{$product->prices->last()->price}} | {{$product->prices->last()->currency}}</div>
