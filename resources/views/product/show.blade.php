@@ -12,6 +12,7 @@
                 <div class="card h-100">
                     <img class="card-img-top" src="{{ url('storage/products/img/'.$product->img) }}" alt="{{$product->name}}">
                     <div class="card-header text-center">{{$product->name}}</div>
+                    <p class="m-no text-center bg-info text-light"><small>Date created - {{$product->created_at}}</small></p>
                     <div class="card-body">
                         <p class="card-text">{{$product->description}}</p>
                     </div>
@@ -45,11 +46,12 @@
                 </div>
                 @else
                 <div class="card h-100">
-                    {!! Form::open(['route' => ['products.store',$product->id], 'method' => 'POST']) !!}
+                    {!! Form::model($product,['route' => ['products.store',$product->id], 'method' => 'POST']) !!}
                     <div class="card-header text-center">Add a price to product</div>
                     <div class="card-body">
-                        {!! Form::text('date_start', null, ['class' => 'form-control datepicker m-t-10', 'placeholder' => ' Select start date', 'required']) !!}
-                        {!! Form::text('date_end', null, ['class' => 'form-control datepicker m-t-10', 'placeholder' => ' Select end date', 'required']) !!}
+                        {!! Form::hidden('product_id', $product->id) !!}
+                        {!! Form::text('date_start', null, ['class' => 'form-control datepicker_start m-t-10', 'placeholder' => 'Select start date', 'required']) !!}
+                        {!! Form::text('date_end', null, ['class' => 'form-control datepicker_end m-t-10', 'placeholder' => 'Select end date', 'required']) !!}
                         {!! Form::number('price', null, ['class' => 'form-control m-t-10', 'min' => '1', 'placeholder' => 'Enter price', 'required']) !!}
                         <select name="currency" class="form-control m-t-10" required>
                             <option value="">Select currency</option>
@@ -65,7 +67,7 @@
                 @endguest
             </div>
             <div class="col-md-9">
-                <div class="card">
+                <div class="card h-100">
                     <div class="card-header text-center">Graph - Priority is the price set on smaller time</div>
                     <div class="card-body">
                         {{--Graphs--}}
@@ -147,7 +149,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.js"></script>
     <script>
         jQuery(document).ready(function($) {
-            $('.datepicker').datepicker({
+            $('.datepicker_start').datepicker({
+                format: 'yyyy-mm-dd',
+            });
+            $('.datepicker_end').datepicker({
                 format: 'yyyy-mm-dd'
             });
         });

@@ -6,11 +6,8 @@ use App\Http\Requests\CreateProduct;
 use App\Price;
 use App\Product;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Storage;
-use Khill\Lavacharts\Lavacharts;
 use Lava;
 use Image;
 
@@ -197,8 +194,6 @@ class ProductController extends Controller
             'date_end' => Carbon::now()->addMonths(2),
             'currency' => $validated['currency'],
         ]);
-
-
 
         //Flash message
 
