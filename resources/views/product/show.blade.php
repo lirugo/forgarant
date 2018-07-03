@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('stylesheets')
-
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker.css" rel="stylesheet">
 @endsection
 
 @section('content')
@@ -41,8 +41,8 @@
                         {!! Form::open(['route' => ['products.create',$product->id], 'method' => 'POST']) !!}
                         <div class="card-header text-center">Add a price to product</div>
                         <div class="card-body">
-                            {!! Form::text('date_start', null, ['class' => 'form-control m-t-10', 'placeholder' => 'Select start date', 'required']) !!}
-                            {!! Form::text('date_end', null, ['class' => 'form-control m-t-10', 'placeholder' => 'Select end date', 'required']) !!}
+                            {!! Form::text('date_start', null, ['class' => 'form-control datepicker m-t-10', 'placeholder' => 'Select start date', 'required', 'readonly']) !!}
+                            {!! Form::text('date_end', null, ['class' => 'form-control datepicker m-t-10', 'placeholder' => 'Select end date', 'required', 'readonly']) !!}
                             {!! Form::number('price', null, ['class' => 'form-control m-t-10', 'placeholder' => 'Enter price', 'required']) !!}
                             {!! Form::select('currency', [
                                 'UAH' => 'UAH',
@@ -51,7 +51,6 @@
                             ] , null, ['class' => 'form-control m-t-10', 'placeholder' => 'Select currency', 'required']) !!}
                         </div>
                         <div class="card-footer bg-transparent border-success">
-
                             {!! Form::submit('Update', ['class' => 'btn btn-outline-success']) !!}
                         </div>
                         {!! Form::close() !!}
@@ -74,5 +73,16 @@
 @endsection
 
 @section('scripts')
-
+    <script
+            src="https://code.jquery.com/jquery-2.2.4.min.js"
+            integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.js"></script>
+    <script>
+        jQuery(document).ready(function($) {
+            $('.datepicker').datepicker({
+                format: 'dd-mm-yyyy'
+            });
+        });
+    </script>
 @endsection
