@@ -15,7 +15,7 @@
                     <div class="card-body">
                         <p class="card-text">{{$product->description}}</p>
                     </div>
-                    <div class="card-footer bg-transparent border-success">Price - {{number_format($product->price,2)}} | {{$product->currency}}</div>
+                    <div class="card-footer bg-transparent border-success text-center">Price - {{number_format($product->price,2)}} | {{$product->currency}}</div>
                 </div>
             </div>
             <div class="col-md-9">
@@ -40,9 +40,7 @@
                     <div class="card-header text-center">Please login to add a price</div>
                     <div class="card-body text-center">
                         <i class="fa fa-lock fa-5x"></i>
-                    </div>
-                    <div class="card-footer bg-transparent border-success">
-                        <a href="{{url('/login')}}" class="btn btn-outline-primary btn-block">Login</a>
+                        <a href="{{url('/login')}}" class="btn btn-outline-primary btn-block"><i class="fa fa-sign-in"></i> {{__('Login')}}</a>
                     </div>
                 </div>
                 @else
@@ -50,8 +48,8 @@
                     {!! Form::open(['route' => ['products.store',$product->id], 'method' => 'POST']) !!}
                     <div class="card-header text-center">Add a price to product</div>
                     <div class="card-body">
-                        {!! Form::text('date_start', null, ['class' => 'form-control datepicker m-t-10', 'placeholder' => 'Select start date', 'required', 'readonly']) !!}
-                        {!! Form::text('date_end', null, ['class' => 'form-control datepicker m-t-10', 'placeholder' => 'Select end date', 'required', 'readonly']) !!}
+                        {!! Form::text('date_start', null, ['class' => 'form-control datepicker m-t-10', 'placeholder' => ' Select start date', 'required']) !!}
+                        {!! Form::text('date_end', null, ['class' => 'form-control datepicker m-t-10', 'placeholder' => ' Select end date', 'required']) !!}
                         {!! Form::number('price', null, ['class' => 'form-control m-t-10', 'min' => '1', 'placeholder' => 'Enter price', 'required']) !!}
                         <select name="currency" class="form-control m-t-10" required>
                             <option value="">Select currency</option>
@@ -59,9 +57,8 @@
                                 <option value="{{ $key }}">{{ $name }}</option>
                             @endforeach
                         </select>
-                    </div>
-                    <div class="card-footer bg-transparent border-success">
-                        {!! Form::submit('Add', ['class' => 'btn btn-outline-success btn-block']) !!}
+                        <hr>
+                        {!! Form::submit('Add', ['class' => 'btn btn-outline-success btn-block m-t-10']) !!}
                     </div>
                     {!! Form::close() !!}
                 </div>
@@ -85,9 +82,17 @@
         <div class="row m-t-20">
             <div class="col-md-3">
                 <div class="card">
-                    <div class="card-header text-center">Header</div>
-                    <div class="card-body">
-                        // Left side bar
+                    <div class="card-header text-center">Quick actions</div>
+                    <div class="card-body text-center">
+                        @guest
+                            <i class="fa fa-lock fa-5x"></i>
+                            <a href="{{url('/login')}}" class="btn btn-outline-primary btn-block"><i class="fa fa-sign-in"></i> {{__('Login')}}</a>
+                        @else
+                            {!! Form::open(['route' => ['products.delete',$product->id], 'method' => 'PUT']) !!}
+                            {!! Form::submit('Delete product',['class' => 'btn btn-outline-danger btn-block']) !!}
+                            {!! Form::close() !!}
+                        @endguest
+                            <a href="{{url('/products')}}" class="btn btn-outline-primary btn-block m-t-10">{{__('Go to products')}}</a>
                     </div>
                 </div>
             </div>
@@ -118,7 +123,7 @@
                                         @guest
                                             <a href="{{url('/login')}}" class="btn btn-outline-primary btn-sm btn-block">{{__('Login')}}</a>
                                         @else
-                                            {!! Form::open(['route' => ['products.delete',$price->id], 'method' => 'DELETE']) !!}
+                                            {!! Form::open(['route' => ['products.price.delete',$price->id], 'method' => 'DELETE']) !!}
                                             {!! Form::submit('Delete',['class' => 'btn btn-outline-danger btn-sm btn-block']) !!}
                                             {!! Form::close() !!}
                                         @endguest
