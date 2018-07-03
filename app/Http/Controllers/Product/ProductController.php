@@ -20,6 +20,21 @@ class ProductController extends Controller
     private function priorityPriceSetLater($product){
         $chart = new Collection();
 
+        //Find max|min date
+        $priceEarly = $product->prices()->first();
+        $priceLate = $priceEarly;
+        foreach($product->prices as $price){
+            if($priceEarly->date_start > $price->date_start)
+                $priceEarly = $price;
+
+            if($priceLate->date_end < $price->date_end)
+                $priceLate = $price;
+        }
+        while (strtotime($priceEarly->date_start) <= strtotime($priceLate->date_end)) {
+            $chart->put($priceEarly->date_start, $priceEarly->price);
+            $priceEarly->date_start = date ("Y-m-d", strtotime("+1 day", strtotime($priceEarly->date_start)));
+        }
+
         foreach($product->prices as $price){
             // Start date
             $dateStart = $price->date_start;
@@ -43,6 +58,21 @@ class ProductController extends Controller
 
         //Get all prices from product
         $prices = $product->prices;
+
+        //Find max|min date
+        $priceEarly = $product->prices()->first();
+        $priceLate = $priceEarly;
+        foreach($product->prices as $price){
+            if($priceEarly->date_start > $price->date_start)
+                $priceEarly = $price;
+
+            if($priceLate->date_end < $price->date_end)
+                $priceLate = $price;
+        }
+        while (strtotime($priceEarly->date_start) <= strtotime($priceLate->date_end)) {
+            $chart->put($priceEarly->date_start, $priceEarly->price);
+            $priceEarly->date_start = date ("Y-m-d", strtotime("+1 day", strtotime($priceEarly->date_start)));
+        }
 
         //Set different between date start and date and
         foreach($prices as $price){

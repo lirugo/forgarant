@@ -24,7 +24,7 @@ class StorePriceProduct extends FormRequest
      */
     public function rules()
     {
-        //IMPORTANT! Its so dirty, I will rewrite this piece of validation...
+        //!IMPORTANT! Its so dirty, I will rewrite this piece of validation...
         $productId = $_POST['product_id'];
         $date_created = Product::find($productId)->first()->prices()->first()->created_at;
 
