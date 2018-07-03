@@ -34,7 +34,19 @@ class PriceController extends Controller
             'currency' => $validated['currency'],
         ]);
 
-        //Flash msg and redirect
+        //Flash msg
+
+        //Redirect
+        return redirect()->back();
+    }
+
+    public function delete($id){
+        //Delete in db
+        Price::destroy($id);
+
+        //Flash msg
+
+        //Redirect
         return redirect()->back();
     }
 }
