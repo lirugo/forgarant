@@ -52,7 +52,7 @@
                     <div class="card-body">
                         {!! Form::text('date_start', null, ['class' => 'form-control datepicker m-t-10', 'placeholder' => 'Select start date', 'required', 'readonly']) !!}
                         {!! Form::text('date_end', null, ['class' => 'form-control datepicker m-t-10', 'placeholder' => 'Select end date', 'required', 'readonly']) !!}
-                        {!! Form::number('price', null, ['class' => 'form-control m-t-10', 'placeholder' => 'Enter price', 'required']) !!}
+                        {!! Form::number('price', null, ['class' => 'form-control m-t-10', 'min' => '1', 'placeholder' => 'Enter price', 'required']) !!}
                         <select name="currency" class="form-control m-t-10" required>
                             <option value="">Select currency</option>
                             @foreach (config('currency.types') as $key => $name)

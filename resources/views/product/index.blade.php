@@ -6,7 +6,13 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header">Our Products</div>
+                    <div class="card-header">
+                        <ul class="nav nav-pills card-header-pills">
+                            <li class="nav-item">
+                                <a class="nav-link btn btn-outline-success" href="{{url('/products/create')}}">Create</a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>

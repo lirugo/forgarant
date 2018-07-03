@@ -140,4 +140,8 @@ class ProductController extends Controller
         //Set product data to view
         return view('product.show')->with('product',$product);
     }
+
+    public function create(){
+        return view('product.create');
+    }
 }
