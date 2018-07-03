@@ -19,7 +19,7 @@
                 </div>
             </div>
             <div class="col-md-9">
-                <div class="card h-100">
+                <div class="card">
                     <div class="card-header text-center">Graph - Priority is the price set later</div>
                     <div class="card-body">
                         {{--Graphs--}}
@@ -88,7 +88,7 @@
                             <i class="fa fa-lock fa-5x"></i>
                             <a href="{{url('/login')}}" class="btn btn-outline-primary btn-block"><i class="fa fa-sign-in"></i> {{__('Login')}}</a>
                         @else
-                            {!! Form::open(['route' => ['products.delete',$product->id], 'method' => 'PUT']) !!}
+                            {!! Form::open(['route' => ['products.delete',$product->id], 'method' => 'DELETE']) !!}
                             {!! Form::submit('Delete product',['class' => 'btn btn-outline-danger btn-block']) !!}
                             {!! Form::close() !!}
                         @endguest
