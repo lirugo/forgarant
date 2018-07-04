@@ -15,6 +15,7 @@ What things you need to install the software and how to install them
 Git
 PHP 7.2+
 Mysql 5.7
+Composer
 ```
 
 ### Installing
@@ -53,7 +54,7 @@ php artisan key:generate
 
 Start PHP server
 ```
-php -S localhost:8000
+php artisan serve
 ```
 
 Open your browser
