@@ -1,3 +1,75 @@
+# ForGarant - project
+
+Web application for control prices.
+
+## DEMO [here](http://46.4.115.154:9696/)
+
+## Getting Started
+
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+
+### Prerequisites
+
+What things you need to install the software and how to install them
+```
+Git
+PHP 7.2+
+Mysql 5.7
+```
+
+### Installing
+
+A step by step series of examples that tell you how to get a development env running
+
+Clone project
+```
+git clone https://github.com/lirugo/forgarant.git
+```
+
+Install composer
+```
+composer install
+```
+
+Configure database - copy .env.example to .env and edit file
+```
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=forgarant
+DB_USERNAME=user
+DB_PASSWORD=password
+```
+
+Migrate database or download [Dumb db](https://drive.google.com/open?id=1OJTgP1ED1kltBtqxCX9JPq5ZHh2U8A_b)
+```
+php artisan migrate --seed
+```
+
+Generate key project
+```
+php artisan key:generate
+```
+
+Start PHP server
+```
+php -S localhost:8000
+```
+
+Open your browser
+```
+http://localhost:8000
+```
+
+Default user
+```
+Email - admin@app.com
+Password - password
+```
+
+
+## Built With
+
 <p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
 
 <p align="center">
