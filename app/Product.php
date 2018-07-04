@@ -18,4 +18,8 @@ class Product extends Model
     {
         return $this->hasMany('App\Price');
     }
+
+    public function lastAddedPrice(){
+        return $this->prices()->latest()->first();
+    }
 }

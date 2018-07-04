@@ -28,7 +28,7 @@
                         @areachart('PriorityPriceSetLater', 'priority_price_set_later')
                     </div>
                     <div class="card-footer bg-transparent border-success">
-                        <p class="text-right text-muted m-no"><small>Last updated - </small></p>
+                        <p class="text-right text-muted m-no"><small>Last updated - {{ Carbon\Carbon::parse($product->lastAddedPrice()->updated_at)->format('Y-m-d H:i') }}</small></p>
                     </div>
                 </div>
             </div>
@@ -75,7 +75,7 @@
                         @areachart('PriorityPriceSetSmallerTime', 'priority_price_set_smaller_time')
                     </div>
                     <div class="card-footer bg-transparent border-success">
-                        <p class="text-right text-muted m-no"><small>Last updated - </small></p>
+                        <p class="text-right text-muted m-no"><small>Last updated - {{ Carbon\Carbon::parse($product->lastAddedPrice()->updated_at)->format('Y-m-d H:i') }}</small></p>
                     </div>
                 </div>
             </div>
