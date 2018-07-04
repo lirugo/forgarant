@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Product;
 use App\Http\Requests\StorePriceProduct;
 use App\Price;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Session;
 
 class PriceController extends Controller
 {
@@ -35,6 +36,7 @@ class PriceController extends Controller
         ]);
 
         //Flash msg
+        Session::flash('success', 'The price was successfully added.');
 
         //Redirect
         return redirect()->back();
@@ -45,6 +47,7 @@ class PriceController extends Controller
         Price::destroy($id);
 
         //Flash msg
+        Session::flash('success', 'The price was successfully deleted.');
 
         //Redirect
         return redirect()->back();

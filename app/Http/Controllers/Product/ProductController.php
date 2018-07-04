@@ -8,6 +8,7 @@ use App\Product;
 use Carbon\Carbon;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Session;
 use Lava;
 use Image;
 
@@ -182,6 +183,7 @@ class ProductController extends Controller
         Product::destroy($id);
 
         //Flash msg
+        Session::flash('success', 'The product was successfully deleted.');
 
         //Redirect
         return redirect()->to(url('/products'));
@@ -225,7 +227,8 @@ class ProductController extends Controller
             'currency' => $validated['currency'],
         ]);
 
-        //Flash message
+        //Flash msg
+        Session::flash('success', 'The product was successfully created.');
 
         //Redirect to new product
         return redirect()->to(url('/products/'.$product->id));
