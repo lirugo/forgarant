@@ -117,17 +117,19 @@
                             @foreach($product->prices as $price)
                                 <tr>
                                     <th scope="row">{{$price->id}}</th>
-                                    <td>{{$price->date_start}}</td>
-                                    <td>{{$price->date_end}}</td>
-                                    <td>{{$price->price}}</td>
-                                    <td>{{$price->currency}}</td>
+                                    <td>{!! Form::text('date_start', $price->date_start, ['class' => 'form-control form-control-sm datepicker_start']) !!}</td>
+                                    <td>{!! Form::text('date_end', $price->date_end, ['class' => 'form-control form-control-sm datepicker_end']) !!}</td>
+                                    <td>{!! Form::number('price', $price->price, ['class' => 'form-control form-control-sm', 'min' => '1']) !!}</td>
+                                    <td>{!! Form::select('currency', config('currency.types'), $price->currency, ['class' => 'form-control form-control-sm', 'required']) !!}</td>
                                     <td>
                                         @guest
                                             <a href="{{url('/login')}}" class="btn btn-outline-primary btn-sm btn-block">{{__('Login')}}</a>
                                         @else
-                                            {!! Form::open(['route' => ['products.price.delete',$price->id], 'method' => 'DELETE']) !!}
-                                            {!! Form::submit('Delete',['class' => 'btn btn-outline-danger btn-sm btn-block']) !!}
-                                            {!! Form::close() !!}
+                                            <div class="btn-group btn-group-sm" role="group">
+                                                {!! Form::open(['route' => ['products.price.delete',$price->id], 'method' => 'DELETE']) !!}
+                                                {!! Form::submit('Delete',['class' => 'btn btn-outline-danger btn-sm m-l-10']) !!}
+                                                {!! Form::close() !!}
+                                            </div>
                                         @endguest
                                     </td>
                                 </tr>

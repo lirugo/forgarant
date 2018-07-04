@@ -26,5 +26,6 @@ Route::group(['prefix' => 'products', 'namespace' => 'Product'], function() {
     Route::post('/{id}/store', 'PriceController@store')->name('products.store');
     Route::delete('/{id}/price/delete', 'PriceController@delete')->name('products.price.delete');
     Route::delete('/{id}/delete', 'ProductController@delete')->name('products.delete');
+    Route::put('/{id}/price/update', 'PriceController@update')->name('products.price.update');
     Route::put('/create', 'ProductController@putCreate')->name('products.create');
 });
